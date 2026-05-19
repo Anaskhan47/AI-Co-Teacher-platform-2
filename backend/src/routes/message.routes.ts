@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { getMessages, sendMessage, markRead, sendEmailToParent } from '../controllers/message.controller';
-import { authenticate } from '../middleware/auth.middleware';
+import { getMessages, sendMessage, markRead, sendEmailToParent } from '../controllers/message.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

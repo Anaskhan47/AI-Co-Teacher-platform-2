@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { getParentDashboard } from '../controllers/parent_dashboard.controller';
-import { authenticate } from '../middleware/auth.middleware';
+import { getParentDashboard } from '../controllers/parent_dashboard.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

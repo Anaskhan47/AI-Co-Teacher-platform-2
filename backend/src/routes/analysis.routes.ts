@@ -1,7 +1,7 @@
 
 import express from 'express';
-import { analyzeData } from '../controllers/analysis.controller';
-import { authenticate } from '../middleware/auth.middleware';
+import { analyzeData } from '../controllers/analysis.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 

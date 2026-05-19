@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { parseJsonLoose } from './ai-guard';
+import { parseJsonLoose } from './ai-guard.js';
 
 export interface GovernanceScore {
   score: number; // 0-1

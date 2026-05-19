@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import { Request, Response } from 'express';
-import { AIService } from '../services/ai.service';
-import { AuthRequest } from '../middleware/auth.middleware';
+import { AIService } from '../services/ai.service.js';
+import { AuthRequest } from '../middleware/auth.middleware.js';
 
 export const analyzeData = async (req: AuthRequest, res: Response) => {
     try {

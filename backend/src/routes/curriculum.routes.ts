@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getMetadata, getBoards } from '../controllers/curriculum.controller';
+import { getMetadata, getBoards } from '../controllers/curriculum.controller.js';
 
 const router = Router();
 

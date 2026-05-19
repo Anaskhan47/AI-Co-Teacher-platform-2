@@ -1,6 +1,6 @@
 import { Response } from 'express';
-import { AuthRequest } from '../middleware/auth.middleware';
-import { AIService } from '../services/ai.service';
+import { AuthRequest } from '../middleware/auth.middleware.js';
+import { AIService } from '../services/ai.service.js';
 
 export const generateExamPaper = async (req: AuthRequest, res: Response) => {
     if (!process.env.GROQ_API_KEY) {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CURRICULUM_DATA } from '../data/curriculumData';
+import { CURRICULUM_DATA } from '../data/curriculumData.js';
 
 export const getMetadata = async (req: Request, res: Response) => {
     try {

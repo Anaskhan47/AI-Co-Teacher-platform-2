@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { generateMaterial, generatePPT } from '../controllers/material.controller';
-import { authenticate } from '../middleware/auth.middleware';
+import { generateMaterial, generatePPT } from '../controllers/material.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

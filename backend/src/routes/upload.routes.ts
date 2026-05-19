@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { uploadFile, extractPdfText } from '../controllers/upload.controller';
-import { upload } from '../middleware/upload.middleware';
-import { authenticate } from '../middleware/auth.middleware';
+import { uploadFile, extractPdfText } from '../controllers/upload.controller.js';
+import { upload } from '../middleware/upload.middleware.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { generateExamPaper } from '../controllers/exam.controller';
-import { authenticate } from '../middleware/auth.middleware';
+import { generateExamPaper } from '../controllers/exam.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

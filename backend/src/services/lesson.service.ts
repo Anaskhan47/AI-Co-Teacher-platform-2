@@ -1,5 +1,5 @@
-import prisma from '../lib/prisma';
-import { CreateLessonDTO, UpdateLessonDTO } from '../types/lesson.types';
+import prisma from '../lib/prisma.js';
+import { CreateLessonDTO, UpdateLessonDTO } from '../types/lesson.types.js';
 
 /**
  * LESSON DOMAIN SERVICE

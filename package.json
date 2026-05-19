@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "build:server": "cd backend && npm run build",
+    "build:server": "node fix-imports.js && cd backend && npm run build",
     "build:client": "vite build",
     "build": "npm run build:server && npm run build:client",
     "vercel-build": "npm run build && npx prisma db push --schema=backend/src/prisma/schema.prisma --accept-data-loss",

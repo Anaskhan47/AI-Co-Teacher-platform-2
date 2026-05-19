@@ -9,9 +9,9 @@ import {
     PPTAIResultSchema,
     AssignmentAIResultSchema,
     SummaryAIResultSchema
-} from './ai-schemas';
-import { AcademicGovernance } from './ai-governance';
-import { parseJsonLoose } from './ai-guard';
+} from './ai-schemas.js';
+import { AcademicGovernance } from './ai-governance.js';
+import { parseJsonLoose } from './ai-guard.js';
 
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { generateQuizAI, saveQuiz, getQuizzes, getQuizById } from '../controllers/quiz.controller';
-import { authenticate } from '../middleware/auth.middleware';
+import { generateQuizAI, saveQuiz, getQuizzes, getQuizById } from '../controllers/quiz.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

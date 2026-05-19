@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { getAssignments, createAssignment, getAssignmentById, updateAssignment, deleteAssignment, getSubmissions, gradeSubmission, generateAssignmentContent } from '../controllers/assignment.controller';
-import { authenticate } from '../middleware/auth.middleware';
+import { getAssignments, createAssignment, getAssignmentById, updateAssignment, deleteAssignment, getSubmissions, gradeSubmission, generateAssignmentContent } from '../controllers/assignment.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

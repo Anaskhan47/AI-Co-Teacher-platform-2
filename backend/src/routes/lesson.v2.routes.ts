@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { authenticate } from '../middleware/auth.middleware';
-import * as LessonV2 from '../controllers/lesson.v2.controller';
-import { safeController } from '../lib/controller-wrapper';
+import { authenticate } from '../middleware/auth.middleware.js';
+import * as LessonV2 from '../controllers/lesson.v2.controller.js';
+import { safeController } from '../lib/controller-wrapper.js';
 
 const router = Router();
 

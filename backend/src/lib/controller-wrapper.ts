@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { AuthRequest } from '../middleware/auth.middleware';
+import { AuthRequest } from '../middleware/auth.middleware.js';
 
 export const safeController = (controllerName: string, fn: (req: AuthRequest, res: Response) => Promise<any>) => {
   return async (req: AuthRequest, res: Response) => {

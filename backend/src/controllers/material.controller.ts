@@ -1,10 +1,10 @@
 // @ts-nocheck
 import { Response } from 'express';
-import { AuthRequest } from '../middleware/auth.middleware';
-import prisma from '../lib/prisma';
-import { AIService } from '../services/ai.service';
+import { AuthRequest } from '../middleware/auth.middleware.js';
+import prisma from '../lib/prisma.js';
+import { AIService } from '../services/ai.service.js';
 import { BoardType } from '@prisma/client';
-import { resolveCurriculumTopic } from '../lib/curriculum-resolver';
+import { resolveCurriculumTopic } from '../lib/curriculum-resolver.js';
 
 export const generateMaterial = async (req: AuthRequest, res: Response) => {
     if (!process.env.GROQ_API_KEY) {
