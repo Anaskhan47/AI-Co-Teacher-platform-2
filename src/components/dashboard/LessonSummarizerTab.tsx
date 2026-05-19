@@ -122,8 +122,7 @@ export function LessonSummarizerTab() {
     const handleDownload = () => {
         if (!result) return;
         const title = mode === "upload" && file ? file.name.replace('.pdf', '') : "Summary";
-        let content = "EXECUTIVE SUMMARY:\n\n" + (result.overview || "") + "\n\n";
-        downloadAsPDF(`${title.replace(/[^a-z0-9]/gi, '_')}_summary.pdf`, title, content);
+        downloadAsPDF({ ...result, title }, `${title.replace(/[^a-z0-9]/gi, '_')}_summary.pdf`);
         toast.success("Exported!");
     };
 
