@@ -37,7 +37,6 @@ export const getAllLessons = async (req: AuthRequest, res: Response) => {
             error: null,
             meta: { count: 0, limit: 50, diagnosticError: error.message }
         });
-        });
     }
 };
 
