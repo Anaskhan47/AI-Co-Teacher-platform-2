@@ -9,6 +9,13 @@ import pdfParse from "pdf-parse";
 import { resolveCurriculumTopic } from '../lib/curriculum-resolver';
 
 export const createLesson = async (req: AuthRequest, res: Response) => {
+    if (!process.env.GROQ_API_KEY) {
+       return res.json({
+          success:true,
+          data:{fallback:true, title: "Fallback Lesson", objective: "System Check", activities: "None", duration: 45}
+       });
+    }
+
     try {
         let { title, subjectId, topicId, grade, objective, duration, activities, homework, resources, aiAssist, curriculum: board, subject: subjectName, topic: topicName, pdfText, unitDetails, numSessions, detailLevel } = req.body;
 

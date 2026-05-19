@@ -3,6 +3,9 @@ import { AuthRequest } from '../middleware/auth.middleware';
 import { AIService } from '../services/ai.service';
 
 export const generateExamPaper = async (req: AuthRequest, res: Response) => {
+    if (!process.env.GROQ_API_KEY) {
+       return res.json({ success: true, data: { fallback: true } });
+    }
     const { subject, grade, marks, difficulty, examType, syllabus, questionCount, pdfText } = req.body;
     console.log(`\n[EXAM GENERATION] New request received:`);
     console.log(`[PAYLOAD] subject=${subject}, grade=${grade}, marks=${marks}, questions=${questionCount}, difficulty=${difficulty}, type=${examType}`);

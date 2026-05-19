@@ -7,6 +7,9 @@ import { BoardType } from '@prisma/client';
 import { resolveCurriculumTopic } from '../lib/curriculum-resolver';
 
 export const generateQuizAI = async (req: AuthRequest, res: Response) => {
+    if (!process.env.GROQ_API_KEY) {
+       return res.json({ success: true, data: { fallback: true } });
+    }
     let { topicId, grade, curriculum: board, subject: subjectName, topic: topicName, pdfText } = req.body;
     try {
         let tName = topicName;

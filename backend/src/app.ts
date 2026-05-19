@@ -106,16 +106,24 @@ app.use('/api/parent-dashboard', parentDashboardRoutes);
 app.use('/api/ai', analysisRoutes);
 app.use('/api/v2/lessons', lessonV2Routes);
 
-app.get('/api/health', (_req, res) => res.json({ success: true, data: { status: 'ok', timestamp: new Date().toISOString() }, error: null }));
+import healthRoutes from './routes/health.routes';
 
+app.use('/api/health', healthRoutes);
 // GLOBAL ERROR HANDLER
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.error("CRITICAL SERVER ERROR:", err.stack);
-    res.status(500).json({ 
-        success: false,
-        data: null,
-        error: err.message || "Internal Server Error"
-    });
+  console.error(err);
+
+  return res.status(500).json({
+    success: false,
+    data: null,
+    error: {
+      code: "INTERNAL_ERROR",
+      message:
+        process.env.NODE_ENV === "production"
+          ? "Internal server error"
+          : err.message
+    }
+  });
 });
 
 export default app;

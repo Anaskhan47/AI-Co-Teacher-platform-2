@@ -7,6 +7,9 @@ import { BoardType } from '@prisma/client';
 import { resolveCurriculumTopic } from '../lib/curriculum-resolver';
 
 export const generateMaterial = async (req: AuthRequest, res: Response) => {
+    if (!process.env.GROQ_API_KEY) {
+       return res.json({ success: true, data: { fallback: true } });
+    }
     let { type, topicId, curriculum: board, grade, subject: subjectName, topic: topicName, pdfText } = req.body;
     try {
         let finalTopicId = topicId;
@@ -104,6 +107,9 @@ export const generateMaterial = async (req: AuthRequest, res: Response) => {
 };
 
 export const generatePPT = async (req: AuthRequest, res: Response) => {
+    if (!process.env.GROQ_API_KEY) {
+       return res.json({ success: true, data: { fallback: true } });
+    }
     const { topic, grade, curriculum, slideCount, pdfText, subject, duration, unitDetails } = req.body;
     try {
         if (!topic || !grade || !curriculum) {
