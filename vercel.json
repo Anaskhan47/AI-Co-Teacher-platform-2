@@ -2,14 +2,14 @@
   "rewrites": [
     {
       "source": "/api/health-raw",
-      "destination": "/api/health-raw.ts"
+      "destination": "/api/health-raw"
     },
     {
       "source": "/api/:path*",
-      "destination": "/api/index.ts"
+      "destination": "/api/index"
     },
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
