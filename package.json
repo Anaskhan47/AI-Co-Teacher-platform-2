@@ -9,7 +9,7 @@
     "build:server": "cd backend && npm run build",
     "build:client": "vite build",
     "build": "npm run build:server && npm run build:client",
-    "vercel-build": "npm run build",
+    "vercel-build": "npm run build && npx prisma db push --schema=backend/src/prisma/schema.prisma --accept-data-loss",
     "postinstall": "prisma generate --schema=backend/src/prisma/schema.prisma"
   },
   "dependencies": {
