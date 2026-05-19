@@ -3,7 +3,13 @@
   "builds": [
     {
       "src": "api/index.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "dev.db",
+          "backend/src/prisma/**/*"
+        ]
+      }
     },
     {
       "src": "package.json",

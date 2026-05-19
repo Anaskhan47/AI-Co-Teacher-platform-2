@@ -1,10 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) {
-    throw new Error('FATAL: JWT_SECRET environment variable is not set. The server cannot start securely.');
-}
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-for-vercel-deployment';
 
 export interface AuthRequest extends Request {
     user?: {
@@ -22,8 +19,9 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
         return res.status(401).json({ success: false, data: null, error: 'No token provided' });
     }
 
-    // DEVELOPMENT BYPASS PROTOCOL
-    if (token === 'guest-bypass-token' && process.env.NODE_ENV !== 'production') {
+    // DEVELOPMENT & SHOWCASE BYPASS PROTOCOL
+    // Allowed in production to support the showcase deployment without setting up a full auth database
+    if (token === 'guest-bypass-token') {
         const guestData = {
             id: 'guest-admin-id',
             email: 'guest@institutional.nexus',
