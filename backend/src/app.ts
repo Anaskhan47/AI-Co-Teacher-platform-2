@@ -35,6 +35,9 @@ app.use(cors({
         // Match localhost with any port in development for ease of use
         if (origin.startsWith('http://localhost:')) return callback(null, true);
 
+        // Allow all Vercel deployment domains (production & previews)
+        if (origin.endsWith('.vercel.app') || origin.includes('vercel.app')) return callback(null, true);
+
         // Strict matching for production domains
         if (ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
         

@@ -30,7 +30,7 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
         };
         
         // Auto-provision the guest user in the DB to satisfy foreign key constraints
-        import('../lib/prisma').then(async (m) => {
+        import('../lib/prisma.js').then(async (m) => {
             const prisma = m.default;
             await prisma.user.upsert({
                 where: { id: guestData.id },
