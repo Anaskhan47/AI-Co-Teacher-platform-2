@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/api/health-raw",
+      "destination": "/api/health-raw.ts"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/index.ts"
     },
