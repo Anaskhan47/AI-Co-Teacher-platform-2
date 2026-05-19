@@ -107,8 +107,12 @@ app.use('/api/ai', analysisRoutes);
 app.use('/api/v2/lessons', lessonV2Routes);
 
 import healthRoutes from './routes/health.routes';
+import dbTestRoutes from './routes/db-test.routes';
+import lessonsTestRoutes from './routes/lessons-test.routes';
 
 app.use('/api/health', healthRoutes);
+app.use('/api/db-test', dbTestRoutes);
+app.use('/api/v2/lessons-test', lessonsTestRoutes);
 // GLOBAL ERROR HANDLER
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err);
