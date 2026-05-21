@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
 import api from "@/api/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -28,14 +27,9 @@ import {
 import { ChevronsUpDown, Check } from "lucide-react";
 
 export function QuizGeneratorTab() {
-    const [searchParams] = useSearchParams();
-    const paramGrade = searchParams.get("grade");
-    const paramSubject = searchParams.get("subject");
-    const paramTopic = searchParams.get("topic");
-
-    const [selectedGrade, setSelectedGrade] = useState(paramGrade || "10");
-    const [selectedSubject, setSelectedSubject] = useState(paramSubject || "");
-    const [topicId, setTopicId] = useState(paramTopic || "");
+    const [selectedGrade, setSelectedGrade] = useState("10");
+    const [selectedSubject, setSelectedSubject] = useState("");
+    const [topicId, setTopicId] = useState("");
     const [openTopic, setOpenTopic] = useState(false);
     const [questionType, setQuestionType] = useState("MCQ");
     const [questions, setQuestions] = useState<any[]>([]);

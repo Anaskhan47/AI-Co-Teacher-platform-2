@@ -13,6 +13,6 @@ router.put('/:id', authenticate, safeController('UpdateLesson', updateLesson));
 router.patch('/:id', authenticate, safeController('PatchLesson', updateLesson));
 router.delete('/:id', authenticate, safeController('DeleteLesson', deleteLesson));
 router.post('/summarize', authenticate, safeController('SummarizeLesson', summarizeLesson));
-router.post('/summarize-pdf', authenticate, upload.single('file'), safeController('SummarizeLessonPdf', summarizeLessonPdf));
+router.post('/summarize-pdf', authenticate, upload.single('file') as any, safeController('SummarizeLessonPdf', summarizeLessonPdf));
 
 export default router;

@@ -1,46 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
-import { Check, CheckCircle2, HelpCircle, Sparkles, Zap, Shield, Globe, Key, Clock, CreditCard, Download, RefreshCw } from "lucide-react";
+import { Check, CheckCircle2, HelpCircle, Sparkles, Zap, Shield, Globe } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
 
 const PricingPage = () => {
     const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly");
-    
-    // License/Subscription States
-    const [tier, setTier] = useState<"Core" | "Elite Pro">("Core");
-    const [licenseKey, setLicenseKey] = useState("");
-    const [creditsUsed, setCreditsUsed] = useState(3);
-
-    useEffect(() => {
-        const stored = localStorage.getItem("licenseTier");
-        if (stored === "Elite Pro") {
-            setTier("Elite Pro");
-        }
-    }, []);
-
-    const handleActivateKey = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (licenseKey.trim().toUpperCase() === "ELITE-PRO-2026") {
-            localStorage.setItem("licenseTier", "Elite Pro");
-            setTier("Elite Pro");
-            toast.success("License protocol verified! Upgraded to Elite Pro.");
-            setLicenseKey("");
-        } else {
-            toast.error("Invalid activation key. Please use ELITE-PRO-2026 for simulation.");
-        }
-    };
-
-    const handleResetLicense = () => {
-        localStorage.removeItem("licenseTier");
-        setTier("Core");
-        toast.info("License reset. Re-calibrated to Core tier limits.");
-    };
 
     const plans = [
         {
@@ -113,7 +82,7 @@ const PricingPage = () => {
     ];
 
     return (
-        <div className="min-h-screen flex flex-col bg-slate-950 text-white font-sans selection:bg-indigo-900 overflow-x-hidden">
+        <div className="min-h-screen flex flex-col bg-slate-50 font-sans selection:bg-indigo-100 overflow-x-hidden">
             <Navbar />
 
             <main className="flex-1 pt-48 pb-40 relative overflow-hidden">
@@ -125,7 +94,7 @@ const PricingPage = () => {
 
                 <div className="container mx-auto px-10 relative z-10">
                     {/* Header */}
-                    <div className="max-w-5xl mx-auto text-center mb-24">
+                    <div className="max-w-5xl mx-auto text-center mb-32">
                         <motion.div 
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -146,167 +115,11 @@ const PricingPage = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-xl md:text-2xl text-slate-400 font-black max-w-3xl mx-auto leading-relaxed uppercase tracking-tighter"
+                            className="text-xl md:text-2xl text-slate-500 font-black max-w-3xl mx-auto leading-relaxed uppercase tracking-tighter"
                         >
                             A high-performance framework to reclaim your focus. Save <span className="text-white italic">hundreds</span> of hours through automated neural synthesis.
                         </motion.p>
                     </div>
-
-                    {/* Subscription Console Block */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="max-w-5xl mx-auto mb-32 bg-slate-900/40 border border-white/10 rounded-[3rem] p-8 md:p-14 backdrop-blur-3xl shadow-[0_40px_100px_rgba(0,0,0,0.6)]"
-                    >
-                        <div className="flex items-center justify-between border-b border-white/5 pb-8 mb-10">
-                            <div>
-                                <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter">License Console</h2>
-                                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Active nodes & verification state</p>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${tier === "Elite Pro" ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/10" : "bg-indigo-500/10 border-indigo-500/20 text-indigo-400"}`}>
-                                    {tier === "Elite Pro" ? "Elite Pro Active" : "Core Account"}
-                                </span>
-                                {tier === "Elite Pro" && (
-                                    <button 
-                                        onClick={handleResetLicense}
-                                        title="Downgrade to core tier"
-                                        className="p-2.5 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl transition-all text-slate-400 hover:text-white"
-                                    >
-                                        <RefreshCw className="w-4 h-4" />
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="grid lg:grid-cols-2 gap-12">
-                            {/* Limits progress */}
-                            <div className="space-y-8">
-                                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Resource Allocations</h3>
-                                
-                                <div className="space-y-4">
-                                    <div className="flex justify-between text-[10px] font-black uppercase tracking-widest">
-                                        <span className="text-slate-400">AI Credit Utilization</span>
-                                        <span>{tier === "Elite Pro" ? "UNLIMITED" : `${creditsUsed} / 5 Credits`}</span>
-                                    </div>
-                                    <div className="h-3 bg-slate-950 rounded-full overflow-hidden border border-white/5">
-                                        <div 
-                                            className={`h-full rounded-full transition-all duration-1000 ${tier === "Elite Pro" ? "bg-gradient-to-r from-emerald-500 to-indigo-500 w-full" : "bg-indigo-500 w-[60%]"}`}
-                                        />
-                                    </div>
-                                    <p className="text-[8px] font-bold text-slate-500 uppercase tracking-wide">
-                                        {tier === "Elite Pro" ? "Elite Plan provides unrestricted neural generations." : "Core tier resets to 5 credits every Monday."}
-                                    </p>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-6 pt-4">
-                                    <div className="bg-slate-950/50 border border-white/5 rounded-2xl p-6">
-                                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Slide Layouts</p>
-                                        <p className="text-xl font-black uppercase">{tier === "Elite Pro" ? "Infinite" : "Standard"}</p>
-                                    </div>
-                                    <div className="bg-slate-950/50 border border-white/5 rounded-2xl p-6">
-                                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">Standard Sync</p>
-                                        <p className="text-xl font-black uppercase">{tier === "Elite Pro" ? "Full Access" : "Basic CBSE"}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Activation code */}
-                            <div className="space-y-8 lg:border-l lg:border-white/5 lg:pl-12">
-                                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">License Verification</h3>
-                                
-                                <form onSubmit={handleActivateKey} className="space-y-5">
-                                    <div className="space-y-3">
-                                        <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest ml-1">Enter Activation Key</label>
-                                        <div className="relative">
-                                            <input 
-                                                type="text" 
-                                                value={licenseKey}
-                                                onChange={(e) => setLicenseKey(e.target.value)}
-                                                placeholder="XXXX-XXXX-XXXX-XXXX"
-                                                className="w-full bg-slate-950/80 text-white placeholder-slate-700 rounded-2xl border border-white/10 px-6 py-4 h-16 text-sm font-bold uppercase tracking-widest focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
-                                            />
-                                            <Key className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600" />
-                                        </div>
-                                    </div>
-                                    <Button 
-                                        type="submit"
-                                        className="w-full h-16 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-[0.25em] rounded-2xl border-none transition-all shadow-xl shadow-indigo-600/20"
-                                    >
-                                        Activate License Protocol
-                                    </Button>
-                                    <p className="text-[8px] font-bold text-slate-600 uppercase tracking-wide text-center">
-                                        Use key <span className="text-indigo-400">ELITE-PRO-2026</span> to unlock Elite tier limits.
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
-
-                        {/* Billing ledger */}
-                        <div className="mt-14 pt-10 border-t border-white/5">
-                            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-3">
-                                <CreditCard className="w-4 h-4 text-indigo-400" />
-                                Billing & Payment History
-                            </h3>
-                            <div className="overflow-x-auto bg-slate-950/40 rounded-2xl border border-white/5">
-                                <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="border-b border-white/5 text-[9px] font-black uppercase tracking-widest text-slate-500">
-                                            <th className="p-5">Invoice Reference</th>
-                                            <th className="p-5">Billing Period</th>
-                                            <th className="p-5">Amount Transacted</th>
-                                            <th className="p-5">Ledger Status</th>
-                                            <th className="p-5 text-right">Receipt</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="text-[10px] font-black uppercase tracking-widest">
-                                        {tier === "Elite Pro" ? (
-                                            <tr className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
-                                                <td className="p-5 text-white flex items-center gap-2">
-                                                    INV-2026-9042
-                                                    <span className="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[7px] font-black tracking-widest rounded">LATEST</span>
-                                                </td>
-                                                <td className="p-5 text-slate-300">May 21, 2026</td>
-                                                <td className="p-5 text-slate-300">$19.00 USD</td>
-                                                <td className="p-5">
-                                                    <span className="inline-flex items-center gap-1.5 text-emerald-400">
-                                                        <CheckCircle2 className="w-3.5 h-3.5" /> PAID
-                                                    </span>
-                                                </td>
-                                                <td className="p-5 text-right">
-                                                    <button 
-                                                        onClick={() => toast.success("Downloading receipt INV-2026-9042...")}
-                                                        className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors"
-                                                    >
-                                                        <Download className="w-3.5 h-3.5" /> PDF
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ) : null}
-                                        <tr className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
-                                            <td className="p-5 text-white">INV-2026-0001</td>
-                                            <td className="p-5 text-slate-300">May 10, 2026</td>
-                                            <td className="p-5 text-slate-300">$0.00 USD</td>
-                                            <td className="p-5">
-                                                <span className="inline-flex items-center gap-1.5 text-emerald-400">
-                                                    <CheckCircle2 className="w-3.5 h-3.5" /> PAID
-                                                </span>
-                                            </td>
-                                            <td className="p-5 text-right">
-                                                <button 
-                                                    onClick={() => toast.success("Downloading receipt INV-2026-0001...")}
-                                                    className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors"
-                                                >
-                                                    <Download className="w-3.5 h-3.5" /> PDF
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </motion.div>
 
                     {/* Billing Toggle */}
                     <div className="flex justify-center mb-24">
