@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 function walkDir(dir) {
     let results = [];
@@ -21,11 +21,6 @@ const files = walkDir('./backend/src');
 files.forEach(file => {
     let content = fs.readFileSync(file, 'utf8');
     
-    // Match import and export statements with relative paths
-    // e.g., import { X } from './something'
-    // e.g., export * from '../something'
-    
-    // We only replace if it doesn't already end with .js or .json
     const regex = /(import|export)\s+([\w\s{},*]+)\s+from\s+['"](\.[^'"]+)['"]/g;
     
     let modified = false;
@@ -37,7 +32,6 @@ files.forEach(file => {
         return match;
     });
 
-    // Also match side-effect imports: import './something'
     const sideEffectRegex = /import\s+['"](\.[^'"]+)['"]/g;
     content = content.replace(sideEffectRegex, (match, p1) => {
         if (!p1.endsWith('.js') && !p1.endsWith('.json')) {
