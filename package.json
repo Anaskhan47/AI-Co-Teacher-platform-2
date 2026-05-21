@@ -1,6 +1,7 @@
 {
   "name": "ai-co-teacher",
   "private": true,
+  "type": "module",
   "version": "0.1.0",
   "engines": {
     "node": ">=18"
