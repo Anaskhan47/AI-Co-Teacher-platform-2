@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,10 +26,12 @@ import api from "@/api/client";
 import pptxgen from "pptxgenjs";
 
 export function PPTGeneratorTab() {
-    const [topic, setTopic] = useState('');
-    const [grade, setGrade] = useState('');
+    const [searchParams] = useSearchParams();
+    
+    const [topic, setTopic] = useState(searchParams.get("topic") || '');
+    const [grade, setGrade] = useState(searchParams.get("grade") || '');
     const [numSlides, setNumSlides] = useState('5');
-    const [curriculum, setCurriculum] = useState('');
+    const [curriculum, setCurriculum] = useState(searchParams.get("board") || 'CBSE');
     const [isGenerating, setIsGenerating] = useState(false);
     const [generatedPPT, setGeneratedPPT] = useState<any>(null);
     const [pdfText, setPdfText] = useState("");
@@ -36,7 +39,7 @@ export function PPTGeneratorTab() {
     const [openTopic, setOpenTopic] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     
-    const [subject, setSubject] = useState('');
+    const [subject, setSubject] = useState(searchParams.get("subject") || '');
     const [duration, setDuration] = useState('45');
     const [unitDetails, setUnitDetails] = useState('');
     const [detailLevel, setDetailLevel] = useState([50]);
