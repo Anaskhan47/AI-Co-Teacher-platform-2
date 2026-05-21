@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from 'react-markdown';
 import {
@@ -68,16 +69,24 @@ function normalizeArray(value: unknown): string[] {
 }
 
 export function AIAssistantTab({ initialMode = "lesson", preloadedResult }: AIAssistantTabProps) {
+    const [searchParams] = useSearchParams();
+    
+    const paramMode = searchParams.get("mode") as "lesson" | "material" | "quiz" | null;
+    const paramBoard = searchParams.get("board");
+    const paramGrade = searchParams.get("grade");
+    const paramSubject = searchParams.get("subject");
+    const paramTopic = searchParams.get("topic");
+
     const [isMounted, setIsMounted] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => { setIsMounted(true); }, []);
 
-    const [mode, setMode] = useState<"lesson" | "material" | "quiz">(initialMode);
-    const [board, setBoard] = useState("CBSE");
-    const [grade, setGrade] = useState(preloadedResult?.grade || "");
-    const [subject, setSubject] = useState(preloadedResult?.subject?.name || preloadedResult?.subject || "");
-    const [topic, setTopic] = useState(preloadedResult?.topic?.name || preloadedResult?.topic || "");
+    const [mode, setMode] = useState<"lesson" | "material" | "quiz">(paramMode || initialMode);
+    const [board, setBoard] = useState(paramBoard || "CBSE");
+    const [grade, setGrade] = useState(preloadedResult?.grade || paramGrade || "");
+    const [subject, setSubject] = useState(preloadedResult?.subject?.name || preloadedResult?.subject || paramSubject || "");
+    const [topic, setTopic] = useState(preloadedResult?.topic?.name || preloadedResult?.topic || paramTopic || "");
     const [detailLevel, setDetailLevel] = useState([70]);
     const [pdfText, setPdfText] = useState("");
     const [unitDetails, setUnitDetails] = useState("");

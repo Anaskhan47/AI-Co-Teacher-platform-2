@@ -4,7 +4,6 @@ dotenv.config();
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import './lib/firebase.js'; // Ensure Firebase Admin SDK is initialized
 import authRoutes from './routes/auth.routes.js';
 import lessonRoutes from './routes/lesson.routes.js';
 import attendanceRoutes from './routes/attendance.routes.js';

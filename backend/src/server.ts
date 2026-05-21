@@ -3,7 +3,7 @@ import app from './app.js';
 const PORT = process.env.PORT || 5000;
 
 // CRITICAL: Environment Validation
-const REQUIRED_ENV = ['JWT_SECRET', 'FIREBASE_SERVICE_ACCOUNT_KEY'];
+const REQUIRED_ENV = ['JWT_SECRET', 'DATABASE_URL'];
 const missingEnv = REQUIRED_ENV.filter(key => !process.env[key]);
 
 if (missingEnv.length > 0) {

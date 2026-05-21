@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 import api from "@/api/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -27,13 +28,18 @@ function safeArray<T>(value: unknown): T[] {
 }
 
 export function QuestionPaperTab() {
+  const [searchParams] = useSearchParams();
+  const paramGrade = searchParams.get("grade");
+  const paramSubject = searchParams.get("subject");
+  const paramTopic = searchParams.get("topic");
+
   const [formData, setFormData] = useState({
-    subject: "",
-    grade: "10",
+    subject: paramSubject || "",
+    grade: paramGrade || "10",
     marks: "80",
     difficulty: "Moderate",
     examType: "Final Examination",
-    syllabus: "",
+    syllabus: paramTopic || "",
     breakdown: {
       mcqs: 10,
       short: 5,
